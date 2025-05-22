@@ -4,7 +4,7 @@ import React from 'react'
 
 const Sidebar = () => {
     return (
-        <div className='w-1/6 h-full flex flex-col justify-between bg-gray-100 p-4 rounded-2xl'>
+        <div className='w-[350px] h-full flex flex-col justify-between bg-gray-100 p-4 rounded-2xl'>
             <div className='flex flex-col gap-4'>
                 {/* Menu */}
                 <div className='flex justify-between'>
