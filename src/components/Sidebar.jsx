@@ -1,6 +1,7 @@
 import { CalendarOutlined, DoubleRightOutlined, LogoutOutlined, MenuOutlined, PaperClipOutlined, PlusOutlined, SearchOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Input } from 'antd'
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false)
@@ -26,39 +27,49 @@ const Sidebar = () => {
                 {!isCollapsed && (
                     <div className='flex flex-col gap-2'>
                         <h1 className='text-lg font-semibold'>Tasks</h1>
-                        <Button
-                            type='text'
-                            icon={<DoubleRightOutlined />}
-                            className='flex justify-between items-center w-full pr-2'
-                        >
-                            <span className='flex-1 text-left'>Upcoming</span>
-                            <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
-                        </Button>
+                        <NavLink to='/upcoming'>
+                            <Button
+                                type='text'
+                                icon={<DoubleRightOutlined />}
+                                className='flex justify-between items-center w-full pr-2'
+                            >
+                                <span className='flex-1 text-left'>Upcoming</span>
+                                <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
+                            </Button>
+                        </NavLink>
 
-                        <Button
-                            type='text'
-                            icon={<UnorderedListOutlined />}
-                            className='flex justify-between items-center w-full pr-2'
-                        >
-                            <span className='flex-1 text-left'>Today</span>
-                            <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
-                        </Button>
-                        <Button
-                            type='text'
-                            icon={<CalendarOutlined />}
-                            className='flex justify-between items-center w-full pr-2'
-                        >
-                            <span className='flex-1 text-left'>Calender</span>
-                            <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
-                        </Button>
-                        <Button
-                            type='text'
-                            icon={<PaperClipOutlined />}
-                            className='flex justify-between items-center w-full pr-2'
-                        >
-                            <span className='flex-1 text-left'>Sticky Wall</span>
-                            <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
-                        </Button>
+                        <NavLink to={'/'}>
+                            <Button
+                                type='text'
+                                icon={<UnorderedListOutlined />}
+                                className='flex justify-between items-center w-full pr-2'
+                            >
+                                <span className='flex-1 text-left'>Today</span>
+                                <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
+                            </Button>
+                        </NavLink>
+
+                        <NavLink to={'/calender'}>
+                            <Button
+                                type='text'
+                                icon={<CalendarOutlined />}
+                                className='flex justify-between items-center w-full pr-2'
+                            >
+                                <span className='flex-1 text-left'>Calender</span>
+                                <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
+                            </Button>
+                        </NavLink>
+
+                        <NavLink to={'/stickwall'}>
+                            <Button
+                                type='text'
+                                icon={<PaperClipOutlined />}
+                                className='flex justify-between items-center w-full pr-2'
+                            >
+                                <span className='flex-1 text-left'>Sticky Wall</span>
+                                <span className='bg-gray-50 rounded text-sm px-2 py-0.5'>12</span>
+                            </Button>
+                        </NavLink>
 
                         <div className='py-2'>
                             <hr className='text-gray-300' />

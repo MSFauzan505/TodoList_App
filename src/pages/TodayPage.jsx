@@ -2,9 +2,9 @@ import { CalendarOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons
 import { Checkbox, Input } from 'antd'
 import React from 'react'
 
-const MainSection = () => {
+const TodayPage = () => {
   return (
-    <div className='flex flex-col gap-8 p-2 mx-4 mt-4 w-full'>
+    <div className='flex flex-col gap-8 '>
       {/* Title page */}
       <div className='flex items-center gap-10'>
         <h1 className='text-5xl font-bold'>Today</h1>
@@ -100,4 +100,4 @@ const MainSection = () => {
   )
 }
 
-export default MainSection
+export default TodayPage
