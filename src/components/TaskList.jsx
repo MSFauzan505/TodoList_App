@@ -1,6 +1,6 @@
 import React from 'react';
 import useDrawer from '../hooks/useDrawer';
-import { Checkbox, Input } from 'antd';
+import { Button, Checkbox, Input } from 'antd';
 import { CalendarOutlined, PlusOutlined } from '@ant-design/icons';
 import DrawerTask from './DrawerTask';
 
@@ -10,15 +10,17 @@ const TaskList = () => {
   return (
     <div className="flex flex-col gap-2 h-full">
       {/* Input Add Task */}
-      <Input
-        placeholder="Add a task"
-        size="large"
-        variant="outlined"
-        addonBefore={<PlusOutlined />}
-      />
+      <Button
+        icon={<PlusOutlined/>}
+        size='large'
+        className='flex justify-between items-center w-full pr-2'
+        onClick={showDrawer}
+      >
+        <span className='flex-1 text-left'>Add new task</span>
+      </Button>
 
       {/* Scrollable Task Area */}
-      <div className="overflow-y-auto flex-1 pr-1"> 
+      <div className="overflow-y-auto flex-1 pr-1">
         {/* Tasks */}
         <div className="flex flex-col border-b hover:bg-gray-100 transition-all border-gray-200 py-3 px-2">
           <div className="flex justify-between w-full">
@@ -51,7 +53,7 @@ const TaskList = () => {
             </span>
           </div>
         </div>
-        
+
       </div>
     </div>
   );
