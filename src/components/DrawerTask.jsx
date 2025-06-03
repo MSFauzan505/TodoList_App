@@ -16,6 +16,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                 list: data.list || 'Personal',
                 date: data.start && data.end ? [data.start, data.end] : [],
                 tags: data.tags || [],
+                subtasks: data.subtasks || [],
             });
         } else {
             form.resetFields();
