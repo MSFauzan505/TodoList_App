@@ -1,5 +1,5 @@
 import React from 'react';
-import Calendar from '../components/Calendar';
+import Calendar from '../components/ui/Calendar';
 import todos from '../data/todos.json';
 
 const CalendarPage = () => {

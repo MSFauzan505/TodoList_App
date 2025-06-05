@@ -1,5 +1,5 @@
 import React from 'react'
-import Notes from '../components/Notes'
+import Notes from '../components/ui/Notes'
 import { Button } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 

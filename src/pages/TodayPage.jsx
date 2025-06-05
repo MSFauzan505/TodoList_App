@@ -1,7 +1,4 @@
-import { CalendarOutlined, PlusOutlined, RightOutlined } from '@ant-design/icons'
-import { Checkbox, Input } from 'antd'
-import DrawerTask from '../components/DrawerTask'
-import TaskList from '../components/TaskList'
+import TaskList from '../components/ui/TaskList'
 
 const TodayPage = () => {
 
