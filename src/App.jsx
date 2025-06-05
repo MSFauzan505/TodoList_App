@@ -8,6 +8,7 @@ import CalenderPage from './pages/CalenderPage'
 import StickWallPage from './pages/StickWallPage'
 import LoginPage from './pages/LoginPage'
 import ProtectedRoute from './components/ProtectedRoute'
+import RegisterPage from './pages/RegisterPage'
 
 const App = () => {
   return (
@@ -17,6 +18,12 @@ const App = () => {
           path='/login'
           element={
               <LoginPage />
+          } />
+
+          <Route
+          path='/register'
+          element={
+              <RegisterPage />
           } />
 
         <Route path="/" element={
