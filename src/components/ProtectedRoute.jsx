@@ -1,10 +1,11 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 const ProtectedRoute = ({children}) => {
     const isLogged = false
 
-    if(isLogged){
-        return <h1>Anda belum login</h1>
+    if(!isLogged){
+        return <Navigate to={'/login'} replace/>
     }
 
     return children
