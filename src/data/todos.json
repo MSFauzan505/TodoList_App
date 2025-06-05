@@ -1,5 +1,6 @@
 [
   {
+    "status" : false,
     "title": "Belajar React dan gooning",
     "desc": "Mempelajari dasar komponen dan state di React",
     "list": "Personal",
