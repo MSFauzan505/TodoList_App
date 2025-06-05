@@ -6,12 +6,27 @@ import TodayPage from './pages/TodayPage'
 import UpcomingPage from './pages/UpcomingPage'
 import CalenderPage from './pages/CalenderPage'
 import StickWallPage from './pages/StickWallPage'
+import LoginPage from './pages/LoginPage'
+import AuthLayout from './Layout/AuthLayout'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route
+          path='/login'
+          element={
+            <AuthLayout>
+              <LoginPage />
+            </AuthLayout>
+          } />
+
+        <Route path="/" element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }>
           <Route index element={<TodayPage />} />
           <Route path="upcoming" element={<UpcomingPage />} />
           <Route path="calender" element={<CalenderPage />} />
