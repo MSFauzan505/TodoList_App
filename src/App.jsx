@@ -7,7 +7,6 @@ import UpcomingPage from './pages/UpcomingPage'
 import CalenderPage from './pages/CalenderPage'
 import StickWallPage from './pages/StickWallPage'
 import LoginPage from './pages/LoginPage'
-import AuthLayout from './Layout/AuthLayout'
 import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
@@ -17,9 +16,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <AuthLayout>
               <LoginPage />
-            </AuthLayout>
           } />
 
         <Route path="/" element={
