@@ -1,12 +1,23 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { signUp } from '../services/auth'
 
 const RegisterPage = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values)
-    // Kirim ke Supabase atau API login kamu di sini
+  const navigate = useNavigate() 
+
+  const onFinish = async (values) => {
+    const {username, email, password} = values
+    
+    const {data , error} = await signUp(email, password ,username)
+
+    if(error){
+      console.log('signup failed' , error)
+    }else{
+      navigate('/login')
+      console.log('signup success', data)
+    }
   }
 
   const onFinishFailed = (errorInfo) => {
@@ -44,7 +55,7 @@ const RegisterPage = () => {
 
             <Form.Item
                 label="password"
-                name={'password'}
+                name='password'
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
               <Input.Password

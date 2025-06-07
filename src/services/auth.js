@@ -10,10 +10,11 @@ export const signIn = async (email, password) => {
 };
 
 // Sign up
-export const signUp = async (email, password) => {
+export const signUp = async (email, password, username) => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    username
   });
 
   return { data, error };
