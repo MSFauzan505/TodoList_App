@@ -1,11 +1,11 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signIn } from '../services/auth'
 
 const LoginPage = () => {
-
+  const navigate = useNavigate()
   const onFinish = async (values) => {
     const { email, password } = values
 
@@ -14,6 +14,7 @@ const LoginPage = () => {
     if (error) {
       console.log('signin failed', error)
     } else {
+      navigate('/')
       console.log('signin success', data)
     }
   }

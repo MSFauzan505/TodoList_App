@@ -1,5 +1,12 @@
 import { supabase } from "../lib/supabaseClient";
 
+// check session
+export const isLogged = async ()=>{
+    const {data: {session}} = await supabase.auth.getSession()
+    const {data: userData} = await supabase.auth.getUser()
+    return !!session || !!userData?.user
+} 
+
 // Sign in
 export const signIn = async (email, password) => {
   const { data, error } = await supabase.auth.signInWithPassword({

@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { isLogged } from '../services/auth'
 
 const ProtectedRoute = ({children}) => {
-    const isLogged = false
+    const [isLoggedIn, setIsLoggedIn] = useState()
 
-    if(!isLogged){
-        return <Navigate to={'/login'} replace/>
+    useEffect(()=>{
+        const checkLogin = async ()=>{
+            const statusSession = await isLogged()
+            setIsLoggedIn(statusSession)
+        }
+        checkLogin()
+    },[])
+
+    if(isLoggedIn === null){
+        return null
+    }
+
+    if(!isLoggedIn){
+        return <Navigate to={'/'} replace/>
     }
 
     return children
