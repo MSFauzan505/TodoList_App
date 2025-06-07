@@ -2,11 +2,20 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
 import { Link } from 'react-router-dom'
+import { signIn } from '../services/auth'
 
 const LoginPage = () => {
-  const onFinish = (values) => {
-    console.log('Success:', values)
-    // Kirim ke Supabase atau API login kamu di sini
+
+  const onFinish = async (values) => {
+    const { email, password } = values
+
+    const { error, data } = await signIn(email, password)
+
+    if (error) {
+      console.log('signin failed', error)
+    } else {
+      console.log('signin success', data)
+    }
   }
 
   const onFinishFailed = (errorInfo) => {
