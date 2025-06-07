@@ -1,10 +1,23 @@
 import { CalendarOutlined, DoubleRightOutlined, LogoutOutlined, MenuOutlined, PaperClipOutlined, PlusOutlined, SearchOutlined, SettingOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Input } from 'antd'
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { signOut } from '../../services/auth'
 
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false)
+    const navigate = useNavigate()
+
+    // handle signout
+    const handleSignOut = async ()=>{
+        const {error} = await signOut()
+        if(error){
+            console.log('signout failed', error)
+        }else{
+            console.log('signput success')
+            navigate('/login')
+        }
+    }
 
     return (
         <div className={`h-full flex flex-col justify-between ${isCollapsed ? 'bg-gray-50' : ' bg-gray-100'} p-4 rounded-2xl transition-all duration-300 ${isCollapsed ? 'w-[80px]' : 'w-[350px]'}`}>
@@ -141,6 +154,7 @@ const Sidebar = () => {
                         type='text'
                         icon={<LogoutOutlined />}
                         className='flex justify-between items-center w-full pr-2'
+                        onClick={handleSignOut}
                     >
                         <span className='flex-1 text-left'>Sign out</span>
 
