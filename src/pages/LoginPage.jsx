@@ -3,18 +3,25 @@ import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { signIn } from '../services/auth'
+import useMessage from '../hooks/useMessage'
 
 const LoginPage = () => {
   const navigate = useNavigate()
+  const {showMessage, contextHolder} = useMessage()
+
   const onFinish = async (values) => {
     const { email, password } = values
 
     const { error, data } = await signIn(email, password)
 
     if (error) {
+      showMessage.error('Signin Failed')
       console.log('signin failed', error)
     } else {
-      navigate('/')
+      showMessage.success('Signin success')
+      setTimeout(()=>{
+        navigate('/')
+      },1000)
       console.log('signin success', data)
     }
   }
@@ -55,6 +62,7 @@ const LoginPage = () => {
             </Form.Item>
 
             <Form.Item>
+              {contextHolder}
               <Button type='primary' htmlType='submit' size='large' block>
                 Sign in
               </Button>
