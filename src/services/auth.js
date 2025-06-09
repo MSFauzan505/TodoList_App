@@ -23,10 +23,21 @@ export const signUp = async (email, password, username) => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    username,
+    options: {
+      data: {username}
+    }
   });
 
-  return { data, error };
+  if(error || !data.user) return {data, error}
+
+  const {error: profileError} = await supabase.from('profiles').insert([
+    {
+      id: data.user.id,
+      username: username
+    }
+  ])
+
+  return { data, error: error || profileError };
 };
 
 // Sign out
@@ -35,9 +46,22 @@ export const signOut = async () => {
   return { error };
 };
 
+// get current username
 export const getCurrentUser = async () => {
   const {
     data: { user },
+    error: userError,
   } = await supabase.auth.getUser();
-  return { user };
+
+  if (userError || !user) {
+    return { error: userError || new Error("user not found") };
+  }
+
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select("username")
+    .eq("id", user.id)
+    .single();
+
+  return {username: profile?.username || 'Guest', error}
 };
