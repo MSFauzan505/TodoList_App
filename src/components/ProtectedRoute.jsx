@@ -3,22 +3,24 @@ import { Navigate } from 'react-router-dom'
 import { isLogged } from '../services/auth'
 
 const ProtectedRoute = ({children}) => {
-    const [isLoggedIn, setIsLoggedIn] = useState()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
         const checkLogin = async ()=>{
             const statusSession = await isLogged()
             setIsLoggedIn(statusSession)
+            setLoading(false)
         }
         checkLogin()
     },[])
 
-    if(isLoggedIn === null){
-        return null
+    if(loading){
+        return <h1>Loading...</h1>
     }
 
     if(!isLoggedIn){
-        return <Navigate to={'/'} replace/>
+        return <Navigate to={'/login'} replace/>
     }
 
     return children
