@@ -28,7 +28,7 @@ const MainLayout = () => {
       <div className='flex h-full'>
         <Sidebar isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
 
-        <main className='flex-1 overflow-y-auto p-4 mt-10 md:mt-1 '>
+        <main className='flex-1 overflow-y-auto p-4  md:mt-1 '>
           <Outlet />
         </main>
       </div>
