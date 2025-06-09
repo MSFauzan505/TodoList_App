@@ -15,7 +15,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { signOut } from '../../services/auth'
 
 const Sidebar = ({ isMobileOpen }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed] = useState(false)
   const navigate = useNavigate()
 
   // handle signout
@@ -39,11 +39,7 @@ const Sidebar = ({ isMobileOpen }) => {
         {/* Header */}
         <div className='flex justify-between items-center'>
           {!isCollapsed && <h1 className='text-2xl font-bold'>Menu</h1>}
-          <MenuOutlined
-            className='cursor-pointer'
-            style={{ fontSize: '1.5rem' }}
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          />
+          
         </div>
 
         {/* Search */}
