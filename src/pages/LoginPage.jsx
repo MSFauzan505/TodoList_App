@@ -33,7 +33,7 @@ const LoginPage = () => {
   return (
     <AuthLayout>
       <div className='flex-1 flex justify-center items-center'>
-        <div className='flex flex-col gap-5 p-3 w-[600px] min-h-64'>
+        <div className='flex flex-col gap-5 p-3  min-h-64'>
           <h1 className='text-5xl font-semibold'>Sign in</h1>
 
           <Form
