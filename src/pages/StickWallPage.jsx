@@ -8,12 +8,12 @@ const StickWallPage = () => {
     <div className='flex flex-col gap-8 h-full '>
       {/* Title page */}
       <div className='flex items-center gap-10'>
-        <h1 className='text-5xl font-bold'>Stick Wall</h1>
+        <h1 className='text-4xl md:text-5xl font-bold'>Stick Wall</h1>
       </div>
 
       {/* notes */}
       <div className='p-5 border border-gray-200 rounded-xl min-h-[400px] w-full overflow-y-auto  '>
-        <div className='grid grid-cols-4 gap-5 '>
+        <div className='flex flex-wrap items-center justify-around gap-5 '>
           <Notes />
           <Notes />
           <Notes />
