@@ -15,10 +15,10 @@ const LoginPage = () => {
     const { error, data } = await signIn(email, password)
 
     if (error) {
-      showMessage.error('Signin Failed')
+      showMessage.error('Sign in Failed')
       console.log('signin failed', error)
     } else {
-      showMessage.success('Signin success')
+      showMessage.success('Sign in success')
       setTimeout(()=>{
         navigate('/')
       },1000)

@@ -3,9 +3,11 @@ import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { signUp } from '../services/auth'
+import useMessage from '../hooks/useMessage'
 
 const RegisterPage = () => {
   const navigate = useNavigate() 
+  const {showMessage, contextHolder} = useMessage()
 
   const onFinish = async (values) => {
     const {username, email, password} = values
@@ -13,9 +15,13 @@ const RegisterPage = () => {
     const {data , error} = await signUp(email, password ,username)
 
     if(error){
+      showMessage.error('Sign up failed')
       console.log('signup failed' , error)
     }else{
-      navigate('/login')
+      showMessage.success('Sign up success')
+      setTimeout(()=>{
+        navigate('/login')
+      }, 1000)
       console.log('signup success', data)
     }
   }
@@ -68,8 +74,9 @@ const RegisterPage = () => {
             </Form.Item>
 
             <Form.Item>
+              {contextHolder}
               <Button type='primary' htmlType='submit' size='large' block>
-                Sign in
+                Sign up
               </Button>
             </Form.Item>
           </Form>
