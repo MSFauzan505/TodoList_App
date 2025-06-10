@@ -54,7 +54,7 @@ const Sidebar = ({ isMobileOpen }) => {
             className={`h-full flex flex-col justify-between p-4 bg-gray-100 transition-all duration-300 ${isCollapsed ? 'w-[80px]' : 'w-[300px]'
                 }`}
         >
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-2 md:gap-4'>
                 {/* Header */}
                 <div className='flex justify-between items-center'>
                     {!isCollapsed && <h1 className='text-2xl font-bold'>Menu</h1>}
@@ -120,10 +120,10 @@ const Sidebar = ({ isMobileOpen }) => {
                             </Button>
                         </NavLink>
 
-                        <hr className='my-2 border-gray-300' />
+                        <hr className='md:my-2 border-gray-300' />
 
                         {/* Lists */}
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col md:gap-2'>
                             <h1 className='text-lg font-semibold'>Lists</h1>
                             {['Personal', 'Work', 'Family'].map((list, i) => (
                                 <Button
@@ -154,10 +154,10 @@ const Sidebar = ({ isMobileOpen }) => {
                             />
                         </div>
 
-                        <hr className='my-2 border-gray-300' />
+                        <hr className='md:my-2 border-gray-300' />
 
                         {/* Tags */}
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-1 md:gap-2'>
                             <h1 className='text-lg font-semibold'>Tags</h1>
                             <div className='flex flex-wrap gap-2'>
                                 {['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4'].map((tag) => (
@@ -174,12 +174,12 @@ const Sidebar = ({ isMobileOpen }) => {
 
             {/* Bottom */}
             {!isCollapsed && (
-                <div className='flex flex-col gap-3'>
+                <div className='flex flex-col gap-1 md:gap-3'>
                     <span className='flex gap-2 pl-3 mb-1'>
                         <MehOutlined 
                             style={{fontSize: '1.5rem'}}
                         />
-                        <h1>{username}</h1>
+                        <h1 className='text-sm md:text-lg'>{username}</h1>
                     </span>
                     <span className='h-[1px] w-full bg-gray-300'></span>
                     <Button
