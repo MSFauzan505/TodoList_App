@@ -20,7 +20,7 @@ export const deleteTodo = async (id)=>{
 }
 
 // get all taks
-export const getTodo = async ()=>{
+export const getTodos = async ()=>{
     const { data, error } = await supabase
     .from('tasks')
     .select()

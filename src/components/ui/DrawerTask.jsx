@@ -1,27 +1,12 @@
 import { PlusOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Checkbox, DatePicker, Drawer, Form, Input, Select } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { useEffect } from 'react';
+
 
 const { RangePicker } = DatePicker;
 
-const DrawerTask = ({ open, onClose, showDrawer, data }) => {
+const DrawerTask = ({ open, onClose, showDrawer}) => {
     const [form] = Form.useForm();
-
-    useEffect(() => {
-        if (data) {
-            form.setFieldsValue({
-                title: data.title || '',
-                description: data.description || '',
-                list: data.list || 'Personal',
-                date: data.start && data.end ? [data.start, data.end] : [],
-                tags: data.tags || [],
-                subtasks: data.subtasks || [],
-            });
-        } else {
-            form.resetFields();
-        }
-    }, [data, form]);
 
     const onFinish = (values) => {
         console.log('Form Submitted:', values);
