@@ -23,8 +23,7 @@ export const deleteTodo = async (id)=>{
 export const getTodo = async ()=>{
     const { data, error } = await supabase
     .from('tasks')
-    .select()
-    .order('create_at', {ascending: false})
+    .select('*')
 
     return {data, error}
 }

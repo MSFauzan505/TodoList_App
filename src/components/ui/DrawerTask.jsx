@@ -1,22 +1,36 @@
 import { PlusOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Checkbox, DatePicker, Drawer, Form, Input, Select } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const { RangePicker } = DatePicker;
 
 const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const [form] = Form.useForm();
+    const [rangeDate, setRangeDate] = useState({})
+
+    // handle range picker
+    const onRangeChange = (dates)=>{
+        if(dates){
+            const [start, end] = dates
+            setRangeDate({
+                start: start.toISOString(),
+                end: end.toISOString()
+            })
+            
+        }else{
+            setRangeDate({})
+        }
+    }
+
 
     useEffect(() => {
         if (data) {
             form.setFieldsValue({
-                title: data.title || '',
-                description: data.description || '',
-                list: data.list || 'Personal',
-                date: data.start && data.end ? [data.start, data.end] : [],
-                tags: data.tags || [],
-                subtasks: data.subtasks || [],
+                title: data.title,
+                desc: data.desc,
+                lists_id: data.lists_id,
+                tags_id: data.tags_id
             });
         } else {
             form.resetFields();
@@ -24,7 +38,13 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     }, [data, form]);
 
     const onFinish = (values) => {
-        console.log('Form Submitted:', values);
+        const finalValues = {
+            ...values,
+            start: rangeDate.start || null,
+            end: rangeDate.end || null,
+            status: false
+        }
+        console.log('Form Submitted:', finalValues);
         onClose();
     };
 
@@ -66,12 +86,12 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                     </Form.Item>
 
                     {/* Description */}
-                    <Form.Item name="description">
+                    <Form.Item name="desc">
                         <TextArea placeholder='Description' />
                     </Form.Item>
 
                     {/* List */}
-                    <Form.Item name="list">
+                    <Form.Item name="lists_id">
                         <div className='flex items-center gap-4'>
                             <h1 className='text-xl w-[100px] font-semibold'>List</h1>
                             <Select size='large' style={{ width: '200px' }} placeholder="Select a list">
@@ -83,15 +103,15 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                     </Form.Item>
 
                     {/* Date */}
-                    <Form.Item name="date">
+                    <Form.Item>
                         <div className='flex items-center gap-4'>
                             <h1 className='text-xl w-[100px] font-semibold'>Due Date</h1>
-                            <RangePicker size='large' />
+                            <RangePicker size='large' onChange={onRangeChange}/>
                         </div>
                     </Form.Item>
 
                     {/* Tags */}
-                    <Form.Item name="tags">
+                    <Form.Item name="tags_id">
                         <div className='flex items-start gap-4'>
                             <h1 className='text-xl w-[100px] font-semibold'>Tags</h1>
                             <div className='flex gap-3 flex-wrap w-72'>
