@@ -13,7 +13,7 @@ import {
 import { Button, Input } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { getCurrentUser, signOut } from '../../services/auth'
+import { getCurrentUser, signOut } from '../../services/authService'
 
 const Sidebar = ({ isMobileOpen }) => {
     const [isCollapsed] = useState(false)

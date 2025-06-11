@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import { isLogged } from '../services/auth'
+import { isLogged } from '../services/authService'
+
 
 const ProtectedRoute = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)

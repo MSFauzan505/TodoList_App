@@ -2,8 +2,8 @@ import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import AuthLayout from '../Layout/AuthLayout'
 import { Button, Input, Form } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
-import { signIn } from '../services/auth'
 import useMessage from '../hooks/useMessage'
+import { signIn } from '../services/authService'
 
 const LoginPage = () => {
   const navigate = useNavigate()
