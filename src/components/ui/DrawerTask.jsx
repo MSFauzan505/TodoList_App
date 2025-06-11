@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const { RangePicker } = DatePicker;
 
-const DrawerTask = ({ open, onClose, showDrawer, data }) => {
+const DrawerTask = ({ open, onClose, showDrawer}) => {
     const [form] = Form.useForm();
     const [rangeDate, setRangeDate] = useState({})
 
