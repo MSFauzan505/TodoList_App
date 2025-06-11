@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createTodo, getTodo } from "../services/todoService";
+import { createTodo,  getTodos } from "../services/todoService";
 
 const useTodos = () => {
   const [loading, setLoading] = useState(false);
@@ -15,9 +15,11 @@ const useTodos = () => {
       setError(error);
       console.log(error);
     } else {
-        setTodos((prev)=> [data[0], ...prev])
+        setTodos((prev)=> [data, ...prev])
     }
     setLoading(false);
+
+     return {error}
   };
 
   //fetch all task
@@ -26,7 +28,7 @@ const useTodos = () => {
       setLoading(true);
       setError(null);
 
-      const { data, error } = await getTodo();
+      const { data, error } = await getTodos();
       if (error) throw error;
 
       setTodos(data || []);

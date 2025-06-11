@@ -2,23 +2,25 @@ import { PlusOutlined, RightOutlined } from '@ant-design/icons';
 import { Button, Checkbox, DatePicker, Drawer, Form, Input, Select } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { useEffect, useState } from 'react';
+import useTodos from '../../hooks/useTodos';
 
 const { RangePicker } = DatePicker;
 
-const DrawerTask = ({ open, onClose, showDrawer}) => {
+const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const [form] = Form.useForm();
     const [rangeDate, setRangeDate] = useState({})
+    const {handleCreateTodo} = useTodos()
 
     // handle range picker
-    const onRangeChange = (dates)=>{
-        if(dates){
+    const onRangeChange = (dates) => {
+        if (dates) {
             const [start, end] = dates
             setRangeDate({
-                start: start.toISOString(),
-                end: end.toISOString()
+                create_at: start.toISOString(),
+                end_at: end.toISOString()
             })
-            
-        }else{
+
+        } else {
             setRangeDate({})
         }
     }
@@ -37,12 +39,18 @@ const DrawerTask = ({ open, onClose, showDrawer}) => {
         }
     }, [data, form]);
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         const finalValues = {
             ...values,
-            start: rangeDate.start || null,
-            end: rangeDate.end || null,
+            create_at: rangeDate.create_at || null,
+            end_at: rangeDate.end_at || null,
             status: false
+        }
+        const {error} = await handleCreateTodo(finalValues)
+        if(error){
+            console.log('failed add task',error)
+        }else{
+            console.log('success add task')
         }
         console.log('Form Submitted:', finalValues);
         onClose();
@@ -91,39 +99,38 @@ const DrawerTask = ({ open, onClose, showDrawer}) => {
                     </Form.Item>
 
                     {/* List */}
-                    <Form.Item name="lists_id">
-                        <div className='flex items-center gap-4'>
-                            <h1 className='text-xl w-[100px] font-semibold'>List</h1>
+                    <div className='flex items-center gap-4'>
+                        <h1 className='text-xl w-[100px] font-semibold'>List</h1>
+                        <Form.Item name="lists_id">
                             <Select size='large' style={{ width: '200px' }} placeholder="Select a list">
-                                <Select.Option value='Personal'>Personal</Select.Option>
-                                <Select.Option value='Work'>Work</Select.Option>
-                                <Select.Option value='Family'>Family</Select.Option>
+                                <Select.Option value={1}>Personal</Select.Option>
+                                <Select.Option value={2}>Work</Select.Option>
+                                <Select.Option value={3}>Family</Select.Option>
                             </Select>
-                        </div>
-                    </Form.Item>
-
+                        </Form.Item>
+                    </div>
                     {/* Date */}
                     <Form.Item>
                         <div className='flex items-center gap-4'>
                             <h1 className='text-xl w-[100px] font-semibold'>Due Date</h1>
-                            <RangePicker size='large' onChange={onRangeChange}/>
+                            <RangePicker size='large' onChange={onRangeChange} />
                         </div>
                     </Form.Item>
 
                     {/* Tags */}
-                    <Form.Item name="tags_id">
-                        <div className='flex items-start gap-4'>
-                            <h1 className='text-xl w-[100px] font-semibold'>Tags</h1>
-                            <div className='flex gap-3 flex-wrap w-72'>
-                                <Button size='large'>Tag 1</Button>
-                                <Button size='large'>Tag 2</Button>
-                                <Button size='large'>Tag 3</Button>
-                                <Button size='large'>Tag 4</Button>
-                                <Button size='large' icon={<PlusOutlined />}>Add tag</Button>
-                            </div>
+                    <div className='flex items-start gap-4'>
+                        <h1 className='text-xl w-[100px] font-semibold'>Tags</h1>
+                        <div className='flex gap-3 flex-wrap w-72'>
+                            <Form.Item name="tags_id">
+                                <Select  size="large" placeholder="Select tags" className='min-w-40'>
+                                    <Select.Option value={1}>Tag 1</Select.Option>
+                                    <Select.Option value={2}>Tag 2</Select.Option>
+                                    <Select.Option value={3}>Tag 3</Select.Option>
+                                    <Select.Option value={4}>Tag 4</Select.Option>
+                                </Select>
+                            </Form.Item>
                         </div>
-                    </Form.Item>
-
+                    </div>
                     {/* Subtasks */}
                     <Form.Item label={<h1 className='text-2xl font-bold'>Subtask:</h1>}>
                         <div className='flex flex-col items-start'>
