@@ -3,6 +3,7 @@ import { Button, Checkbox, DatePicker, Drawer, Form, Input, Select } from 'antd'
 import TextArea from 'antd/es/input/TextArea';
 import { useEffect, useState } from 'react';
 import useTodos from '../../hooks/useTodos';
+import useMessage from '../../hooks/useMessage';
 
 const { RangePicker } = DatePicker;
 
@@ -10,6 +11,23 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const [form] = Form.useForm();
     const [rangeDate, setRangeDate] = useState({})
     const {handleCreateTodo} = useTodos()
+    const {showMessage, contextHolder} = useMessage()
+
+    
+    
+    useEffect(() => {
+        if (data) {
+            form.setFieldsValue({
+                title: data.title,
+                desc: data.desc,
+                lists_id: data.lists_id,
+                tags_id: data.tags_id
+            });
+        } else {
+            form.resetFields();
+        }
+    }, [data, form]);
+
 
     // handle range picker
     const onRangeChange = (dates) => {
@@ -25,20 +43,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
         }
     }
 
-
-    useEffect(() => {
-        if (data) {
-            form.setFieldsValue({
-                title: data.title,
-                desc: data.desc,
-                lists_id: data.lists_id,
-                tags_id: data.tags_id
-            });
-        } else {
-            form.resetFields();
-        }
-    }, [data, form]);
-
+    // handle submit
     const onFinish = async (values) => {
         const finalValues = {
             ...values,
@@ -48,8 +53,10 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
         }
         const {error} = await handleCreateTodo(finalValues)
         if(error){
+            showMessage.error('Failed add taks')
             console.log('failed add task',error)
-        }else{
+        }else{  
+            showMessage.success('Success add task')
             console.log('success add task')
         }
         console.log('Form Submitted:', finalValues);
@@ -159,6 +166,8 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                             ))}
                         </div>
                     </Form.Item>
+                    {/* show message */}
+                    {contextHolder}
                 </Form>
             </Drawer>
         </>
