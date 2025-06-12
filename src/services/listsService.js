@@ -20,12 +20,11 @@ export const createList = async (newList)=>{
 
 // delete list
 export const deleteList = async (id)=>{
-    const {data, error} = await supabase
+    const { error} = await supabase
     .from('lists')
     .delete()
     .eq('id', id)
-    .select()
-
-    return {data, error}
+    
+    return { error}
 }
 

@@ -1,5 +1,6 @@
 import {
     CalendarOutlined,
+    DeleteOutlined,
     DoubleRightOutlined,
     LogoutOutlined,
     MehOutlined,
@@ -24,7 +25,7 @@ const Sidebar = ({ isMobileOpen }) => {
     const [username, setUsername] = useState('')
     const [color, setColor] = useState('#4ad483')
     const [newList, setNewList] = useState('')
-    const { lists, createNewList } = useLists()
+    const { lists, createNewList, removeList } = useLists()
 
     // handle create new list
     const handleCreateList = async (newList) => {
@@ -41,6 +42,18 @@ const Sidebar = ({ isMobileOpen }) => {
         }
         setNewList('')
         setColor('#4ad483')
+
+    }
+
+    // handle delete list
+    const handleDeleteList = async (id)=>{ 
+        const {error} = await removeList(id)
+        if(error){
+            showMessage.error('Failed deleted list')
+            console.log(error)
+        }else{
+            showMessage.success('Success deleted list')
+        }
 
     }
 
@@ -164,6 +177,10 @@ const Sidebar = ({ isMobileOpen }) => {
                                     className='flex justify-between items-center w-full pr-2'
                                 >
                                     <span className='flex-1 text-left'>{list.title}</span>
+                                    <DeleteOutlined
+                                        className='cursor-pointer'
+                                        onClick={()=> handleDeleteList(list.id)}
+                                    />
                                 </Button>) : null
                             )) : <span className='flex-1 text-left'>No list yet</span>}
 

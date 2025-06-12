@@ -31,31 +31,35 @@ const useLists = () => {
       setLists((prev) => [data, ...prev]);
     }
     setLoading(false);
+    return { error };
+  };
+
+  //   remove list
+  const removeList = async (id) => {
+
+    setLoading(true);
+    const { error } = await deleteList(id);
+    if (error) {
+      console.log(error);
+    } else {
+      setLists((prevLists) => prevLists.filter((list) => list.id !== id));
+    }
+    setLoading(false);
+
     return {error}
   };
 
-  const removeList = async (id)=>{
-    setLoading(true)
-    const {data, error} = await deleteList(id)
-    if(error){
-        console.log(error)
-    }else{
-        setLists(prevLists => prevLists.filter(list => list.id !== data.id))
-    }
-    setLoading(false)
-  }
-
-  useEffect(()=>{
-    fetchAllLists()
-  },[lists])
+  useEffect(() => {
+    fetchAllLists();
+  }, [lists]);
 
   return {
     lists,
     createNewList,
     removeList,
     setLists,
-    loading
-  }
+    loading,
+  };
 };
 
 export default useLists;
