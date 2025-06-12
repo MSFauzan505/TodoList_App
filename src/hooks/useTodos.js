@@ -7,7 +7,7 @@ const useTodos = () => {
   const [todos, setTodos] = useState([]);
 
   // create a new task
-  const handleCreateTodo = async (newTask) => {
+  const CreateNewTodo = async (newTask) => {
     setLoading(true);
     setError(null);
     const { data, error } = await createTodo(newTask);
@@ -47,7 +47,7 @@ const useTodos = () => {
     todos,
     loading,
     error,
-    handleCreateTodo,
+    CreateNewTodo,
   };
 };
 

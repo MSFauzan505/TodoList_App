@@ -10,7 +10,7 @@ const { RangePicker } = DatePicker;
 const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const [form] = Form.useForm();
     const [rangeDate, setRangeDate] = useState({})
-    const {handleCreateTodo} = useTodos()
+    const {CreateNewTodo} = useTodos()
     const {showMessage, contextHolder} = useMessage()
 
     
@@ -51,7 +51,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
             end_at: rangeDate.end_at || null,
             status: false
         }
-        const {error} = await handleCreateTodo(finalValues)
+        const {error} = await CreateNewTodo(finalValues)
         if(error){
             showMessage.error('Failed add taks')
             console.log('failed add task',error)

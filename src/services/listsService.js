@@ -24,6 +24,7 @@ export const deleteList = async (id)=>{
     .from('lists')
     .delete()
     .eq('id', id)
+    .select()
 
     return {data, error}
 }
