@@ -2,9 +2,11 @@ import { supabase } from "../lib/supabaseClient"
 
 // fetch all lists
 export const getLists = async ()=>{
+    const {data: {user}} = await supabase.auth.getUser()
     const {data, error} = await supabase
     .from('lists')
     .select('*')
+    .eq('profiles_id', user.id)
 
     return {data, error}
 }

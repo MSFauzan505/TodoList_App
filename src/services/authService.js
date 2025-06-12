@@ -63,5 +63,5 @@ export const getCurrentUser = async () => {
     .eq("id", user.id)
     .single();
 
-  return {username: profile?.username || 'Guest', error}
+  return {id: user.id,username: profile?.username || 'Guest', error}
 };

@@ -12,17 +12,18 @@ import {
     UnorderedListOutlined,
 } from '@ant-design/icons'
 import { Button, ColorPicker, Input } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { getCurrentUser, signOut } from '../../services/authService'
+import {  signOut } from '../../services/authService'
 import useLists from '../../hooks/useLists'
 import useMessage from '../../hooks/useMessage'
+import useUserId from '../../hooks/useUserId'
 
 const Sidebar = ({ isMobileOpen }) => {
     const [isCollapsed] = useState(false)
     const { showMessage, contextHolder } = useMessage()
+    const {username, userId} = useUserId()
     const navigate = useNavigate()
-    const [username, setUsername] = useState('')
     const [color, setColor] = useState('#4ad483')
     const [newList, setNewList] = useState('')
     const { lists, createNewList, removeList } = useLists()
@@ -31,7 +32,8 @@ const Sidebar = ({ isMobileOpen }) => {
     const handleCreateList = async (newList) => {
         const finalValues = {
             title: newList || null,
-            color: color || null
+            color: color || null,
+            profiles_id: userId || null
         }
         const { error } = await createNewList(finalValues)
         if (error) {
@@ -68,23 +70,7 @@ const Sidebar = ({ isMobileOpen }) => {
         }
     }
 
-    // get username from current session
-    useEffect(() => {
-        const fetchUsername = async () => {
-            const { username, error } = await getCurrentUser()
-
-            if (error) {
-                console.log('fetch username failed', error)
-                return
-            }
-
-            if (username) {
-                setUsername(username)
-            }
-        }
-        fetchUsername()
-    }, [])
-
+   
 
     const sidebarContent = (
         <div
