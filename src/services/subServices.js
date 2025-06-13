@@ -2,11 +2,16 @@ import { supabase } from "../lib/supabaseClient"
 
 // get all subtask
 export const getSubTodos = async () =>{
-    // ambil id tasks untuk di sama dengan sesuai tasks masing
+    const {data : taskIds} = await supabase
+    .from('tasks')
+    .select('id')
+
+    const ids = taskIds.map(task => task.id)
+
     const {data, error} = await supabase
     .from('subtasks')
     .select('*')
-    // .eq()
+    .eq('task_id', ids)
     return {data, error}
 }
 
