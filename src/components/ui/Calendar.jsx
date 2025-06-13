@@ -5,7 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import useDrawer from '../../hooks/useDrawer';
 import DrawerTask from './DrawerTask';
 
-export default function Calendar({ todos }) {
+export default function Calendar() {
   const { open, onClose, showDrawer, data } = useDrawer();
 
   return (
@@ -19,11 +19,11 @@ export default function Calendar({ todos }) {
         eventClassNames={() => 'bg-blue-200'} // styling warna per task nya
         eventClick={(info) => showDrawer(info.event)}
         eventMouseLeave={() => onClose()}
-        events={todos.map(todo => ({
-          title: todo.title,
-          start: todo.start,
-          end: todo.end,
-        }))}
+        // events={todos.map(todo => ({
+        //   title: todo.title,
+        //   start: todo.start,
+        //   end: todo.end,
+        // }))}
         headerToolbar={{
           left: 'title',
           right: 'prev,next today',
