@@ -4,17 +4,19 @@ import TextArea from 'antd/es/input/TextArea';
 import { useEffect, useState } from 'react';
 import useTodos from '../../hooks/useTodos';
 import useMessage from '../../hooks/useMessage';
+import useLists from '../../hooks/useLists';
 
 const { RangePicker } = DatePicker;
 
 const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const [form] = Form.useForm();
     const [rangeDate, setRangeDate] = useState({})
-    const {CreateNewTodo} = useTodos()
-    const {showMessage, contextHolder} = useMessage()
+    const { CreateNewTodo } = useTodos()
+    const { showMessage, contextHolder } = useMessage()
+    const { lists } = useLists()
 
-    
-    
+
+
     useEffect(() => {
         if (data) {
             form.setFieldsValue({
@@ -51,11 +53,11 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
             end_at: rangeDate.end_at || null,
             status: false
         }
-        const {error} = await CreateNewTodo(finalValues)
-        if(error){
+        const { error } = await CreateNewTodo(finalValues)
+        if (error) {
             showMessage.error('Failed add taks')
-            console.log('failed add task',error)
-        }else{  
+            console.log('failed add task', error)
+        } else {
             showMessage.success('Success add task')
             console.log('success add task')
         }
@@ -110,9 +112,10 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                         <h1 className='text-xl w-[100px] font-semibold'>List</h1>
                         <Form.Item name="lists_id">
                             <Select size='large' style={{ width: '200px' }} placeholder="Select a list">
-                                <Select.Option value={1}>Personal</Select.Option>
-                                <Select.Option value={2}>Work</Select.Option>
-                                <Select.Option value={3}>Family</Select.Option>
+                                {lists.map((list) => (
+                                    <Select.Option value={list.id}>{list.title}</Select.Option>
+                                ))}
+
                             </Select>
                         </Form.Item>
                     </div>
@@ -129,7 +132,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                         <h1 className='text-xl w-[100px] font-semibold'>Tags</h1>
                         <div className='flex gap-3 flex-wrap w-72'>
                             <Form.Item name="tags_id">
-                                <Select  size="large" placeholder="Select tags" className='min-w-40'>
+                                <Select size="large" placeholder="Select tags" className='min-w-40'>
                                     <Select.Option value={1}>Tag 1</Select.Option>
                                     <Select.Option value={2}>Tag 2</Select.Option>
                                     <Select.Option value={3}>Tag 3</Select.Option>
