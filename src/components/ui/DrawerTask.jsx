@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import useTodos from '../../hooks/useTodos';
 import useMessage from '../../hooks/useMessage';
 import useLists from '../../hooks/useLists';
-import useSubTodo from '../../hooks/useSubTodo';
 
 const { RangePicker } = DatePicker;
 
@@ -15,9 +14,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const { CreateNewTodo } = useTodos()
     const { showMessage, contextHolder } = useMessage()
     const { lists } = useLists()
-    const {subTasks} = useSubTodo()
 
-    
 
     useEffect(() => {
         if (data) {
