@@ -11,10 +11,11 @@ export const getSubTodos = async () =>{
     const {data, error} = await supabase
     .from('subtasks')
     .select('*')
-    .eq('task_id', ids)
+    .in('tasks_id', ids)
     return {data, error}
 }
 
+   
 // create subtask
 export const createSubTodo = async (subTodo) =>{
     const {data, error} = await supabase

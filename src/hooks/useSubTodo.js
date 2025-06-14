@@ -13,6 +13,7 @@ const useSubTodo = ()=>{
             console.log(error)
         }else{
             setSubTasks(data)
+            console.log(data)
         }
         setLoading(false)
     }
@@ -43,13 +44,13 @@ const useSubTodo = ()=>{
 
     useEffect(()=>{
         fetchSubTodos()
-    }, [subTasks])
+    }, [])
     
     return {
         loading,
         subTasks,
         createNewSubTask,
-        removeSubTask
+        removeSubTask,
     }
 }
 
