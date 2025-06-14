@@ -15,7 +15,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
     const { showMessage, contextHolder } = useMessage()
     const { lists } = useLists()
 
-
+    
     useEffect(() => {
         if (data) {
             form.setFieldsValue({

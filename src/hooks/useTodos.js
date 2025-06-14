@@ -41,7 +41,7 @@ const useTodos = () => {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [todos]);
 
   return {
     todos,

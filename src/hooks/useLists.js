@@ -29,6 +29,7 @@ const useLists = () => {
       console.log(error);
     } else {
       setLists((prev) => [data, ...prev]);
+      await fetchAllLists()
     }
     setLoading(false);
     return { error };
@@ -43,6 +44,7 @@ const useLists = () => {
       console.log(error);
     } else {
       setLists((prevLists) => prevLists.filter((list) => list.id !== id));
+      await fetchAllLists()
     }
     setLoading(false);
 
@@ -59,6 +61,7 @@ const useLists = () => {
     removeList,
     setLists,
     loading,
+    fetchAllLists
   };
 };
 
