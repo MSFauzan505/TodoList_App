@@ -51,7 +51,7 @@ const useLists = () => {
 
   useEffect(() => {
     fetchAllLists();
-  }, [lists]);
+  }, []);
 
   return {
     lists,

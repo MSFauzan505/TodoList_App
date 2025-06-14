@@ -64,7 +64,7 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
         onClose();
     };
 
-    
+
 
     return (
         <>
@@ -112,13 +112,40 @@ const DrawerTask = ({ open, onClose, showDrawer, data }) => {
                     <div className='flex items-center gap-4'>
                         <h1 className='text-xl w-[100px] font-semibold'>List</h1>
                         <Form.Item name="lists_id">
-                            <Select size='large' style={{ width: '200px' }} placeholder="Select a list">
+                            <Select
+                                size="large"
+                                style={{ width: '200px' }}
+                                placeholder={lists.length === 0 ? 'Loading...' : 'Select a list'}
+                                loading={lists.length === 0}
+                            >
                                 {lists.map((list) => (
-                                    <Select.Option value={list.id}>{list.title}</Select.Option>
+                                    <Select.Option
+                                        key={list.id}
+                                        value={list.id}
+                                    >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '0.5rem',
+                                            }}
+                                        >
+                                            {/* Circle warna */}
+                                            <div
+                                                style={{
+                                                    width: '12px',
+                                                    height: '12px',
+                                                    borderRadius: '20%',
+                                                    backgroundColor: list.color || '#ccc',
+                                                }}
+                                            />
+                                            <span>{list.title}</span>
+                                        </div>
+                                    </Select.Option>
                                 ))}
-
                             </Select>
                         </Form.Item>
+
                     </div>
                     {/* Date */}
                     <Form.Item>
