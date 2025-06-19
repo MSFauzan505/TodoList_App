@@ -1,12 +1,38 @@
-# React + Vite
+# 📝 Todo List App with Vite + Tailwind CSS + Supabase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and minimalistic Todo List app built with **React (Vite)**, styled using **Tailwind CSS**, and powered by **Supabase** for backend and data storage.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ Create, edit, delete todos
+- 📅 Add due dates, priorities, and categories
+- ☁️ Store and sync todos with Supabase (PostgreSQL)
+- 💡 Instant update with real-time Supabase (optional)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📸 Screenshots
+
+> 
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech        | Description                             |
+|-------------|-----------------------------------------|
+| Vite        | Fast frontend build tool                |
+| React       | UI library for building components      |
+| TailwindCSS | Utility-first CSS framework             |
+| Supabase    | Backend-as-a-Service (Auth, DB, API)    |
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/username/todolist-vite-supabase.git
+cd todolist-vite-supabase
+npm install
